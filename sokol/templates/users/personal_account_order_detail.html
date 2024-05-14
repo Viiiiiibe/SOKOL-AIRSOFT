@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}
+Заказ № {{order.order_number}}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load user_filters %}
+<div class="main-content space-padding-tb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="customer-page">
+                            <div class="title-page">
+                                <h3>Заказ № {{order.order_number}}</h3>
+                            </div>
+                            <div class="form-customer form-login">
+                                <div class="form-group">
+                                    <label>Статус:</label>
+                                    <p>{{order.get_order_status_display}}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Список товаров:</label>
+                                    <p>{{order.ordered_products}}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Стоимость товаров:</label>
+                                    <p>{{order.order_price}} ₽</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Способ получения:</label>
+                                    <p>{{order.order_delivery_method}}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Адрес:</label>
+                                    <p>
+                                        {{order.order_region}} обл., {{order.order_city}}
+                                        {% if order.order_street is not None and order.order_street|length > 0%}, ул. {{order.order_street}}{% endif %}
+                                        {% if order.order_house is not None and order.order_house|length > 0%}, д. {{order.order_house}}{% endif %}
+                                        {% if order.order_flat is not None and order.order_flat|length > 0%}, кв. {{order.order_flat}}{% endif %}
+                                        {% if order.order_entrance is not None and order.order_entrance|length > 0%}, подъезд {{order.order_entrance}}{% endif %}
+                                        {% if order.order_floor is not None and order.order_floor|length > 0%}, этаж {{order.order_floor}}{% endif %}
+                                        {% if order.order_intercom is not None and order.order_intercom|length > 0%}, домофон {{order.order_intercom}}{% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
